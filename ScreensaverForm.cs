@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Diagnostics;
+using Microsoft.Web.WebView2;
 
 namespace pl.polidea.lab.Web_Page_Screensaver
 {
@@ -109,7 +110,7 @@ namespace pl.polidea.lab.Web_Page_Screensaver
                 try
                 {
                     Debug.WriteLine($"Navigating: {url}");
-                    webView1.Navigate(url);
+                    webView1.Source = new System.Uri(url);
                 }
                 catch
                 {

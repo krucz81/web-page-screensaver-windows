@@ -1,13 +1,12 @@
 ﻿namespace pl.polidea.lab.Web_Page_Screensaver
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
     using Microsoft.Win32;
-
+    using Microsoft.Web.WebView2.WinForms;
     public class PreferencesManager 
     {
         private const string MULTISCREEN_PREF = "MultiScreenMode";

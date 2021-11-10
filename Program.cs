@@ -2,6 +2,9 @@
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.IO;
+using Microsoft.Web.WebView2;
+using Microsoft.Web.WebView2.Core;
+using Microsoft.Web.WebView2.WinForms;
 
 namespace pl.polidea.lab.Web_Page_Screensaver
 {

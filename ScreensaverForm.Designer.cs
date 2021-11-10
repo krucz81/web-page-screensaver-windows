@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.closeButton = new System.Windows.Forms.Button();
-            this.webView1 = new Microsoft.Toolkit.Forms.UI.Controls.WebView();
+            this.webView1 = new Microsoft.Web.WebView2.WinForms.WebView2();
             ((System.ComponentModel.ISupportInitialize)(this.webView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,7 +78,7 @@
 
         #endregion
         private System.Windows.Forms.Button closeButton;
-        private Microsoft.Toolkit.Forms.UI.Controls.WebView webView1;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView1;
     }
 }
 
