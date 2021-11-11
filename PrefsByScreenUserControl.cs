@@ -90,7 +90,7 @@ namespace Web_Page_Screensaver
 
         private void addUrlButton_Click(object sender, EventArgs e)
         {
-            ListViewItem item = lvUrls.Items.Add(String.Empty);
+            ListViewItem item = lvUrls.Items.Add("https://janemiceli.github.io/matrix/");
             item.BeginEdit();
         }
 
@@ -114,6 +114,11 @@ namespace Web_Page_Screensaver
                 itemsList[b] = itemA;
                 itemsList[b].Selected = itemASelected;
             }
+        }
+
+        private void lvUrls_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            //item.BeginEdit();
         }
     }
 }

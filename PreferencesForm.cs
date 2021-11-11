@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.Win32;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Miceli.Web_Page_Screensaver
 {
@@ -14,7 +15,7 @@ namespace Miceli.Web_Page_Screensaver
     {
         private PreferencesManager prefsManager = new PreferencesManager();
 
-        private List<PrefsByScreenUserControl> screenUserControls;
+        private List<PrefsByScreenUserControl> screenUserControls = new List<PrefsByScreenUserControl>();
 
         public PreferencesForm()
         {
@@ -31,15 +32,15 @@ namespace Miceli.Web_Page_Screensaver
             else
             {
                 multiScreenGroup.Enabled = true;
-                SetMultiScreenButtonFromMode();
-                ArrangeScreenTabs();
             }
+            SetMultiScreenButtonFromMode();
+            ArrangeScreenTabs();
         }
 
         private void LoadValuesForTab(int screenNum)
         {
             var currentPrefsUserControl = screenUserControls[screenNum];
-            loadUrlsForTabToControl(screenNum, currentPrefsUserControl);
+            LoadUrlsForTabToControl(screenNum, currentPrefsUserControl);
             currentPrefsUserControl.nudRotationInterval.Value = prefsManager.GetRotationIntervalByScreen(screenNum);
             currentPrefsUserControl.cbRandomize.Checked = prefsManager.GetRandomizeFlagByScreen(screenNum);
         }
@@ -51,13 +52,17 @@ namespace Miceli.Web_Page_Screensaver
                 case PreferencesManager.MultiScreenModeItem.Span:
                     RemoveExtraTabPages();
                     screenTabControl.TabPages[0].Text = "Composite Screen";
-                    screenUserControls = new List<PrefsByScreenUserControl>() { prefsByScreenUserControl1 };
+                    // Need to clear because we only expect one tab
+                    screenUserControls.Clear();
+                    screenUserControls.Add(prefsByScreenUserControl1);
                     LoadValuesForTab(0);
                     break;
                 case PreferencesManager.MultiScreenModeItem.Mirror:
                     RemoveExtraTabPages();
                     screenTabControl.TabPages[0].Text = "Each Screen";
-                    screenUserControls = new List<PrefsByScreenUserControl>() { prefsByScreenUserControl1 };
+                    // Need to clear because we only expect one tab
+                    screenUserControls.Clear();
+                    screenUserControls.Add(prefsByScreenUserControl1);
                     LoadValuesForTab(0);
                     break;
                 case PreferencesManager.MultiScreenModeItem.Separate:
@@ -89,8 +94,10 @@ namespace Miceli.Web_Page_Screensaver
                         else if (screenTabControl.TabPages.Count == 1)
                         {
                             tabPage = screenTabControl.TabPages[0];
-                            screenUserControls =
-                                new List<PrefsByScreenUserControl>() { prefsByScreenUserControl1 };
+                            //screenUserControls =
+                            // Need to clear because we only expect one tab
+                            screenUserControls.Clear();
+                            screenUserControls.Add(prefsByScreenUserControl1);
                         }
 
                         LoadValuesForTab(i);
@@ -145,25 +152,27 @@ namespace Miceli.Web_Page_Screensaver
             prefsManager.ResetEffectiveScreensList();
         }
 
-        private void readBackValuesFromUI()
+        private void ReadBackValuesFromUI()
         {
-            for (var i = 0; i < screenUserControls.Count; i++)
+
+            for (int i = 0; i < screenUserControls.Count; i++)
             {
                 var currentPrefsUserControl = screenUserControls[i];
-                List<string> urls = (from ListViewItem lvUrlsItem in currentPrefsUserControl.lvUrls.Items
-                    select lvUrlsItem.Text).ToList();
+                List<string> urls = (from ListViewItem lvUrlsItem in currentPrefsUserControl.lvUrls.Items select lvUrlsItem.Text).ToList();
+
+                //List<string> urls = new List<string> (from ListViewItem lvUrlsItem in screenUserControls[i].lvUrls.Items
+                //  select lvUrlsItem.Text).ToList();
                 prefsManager.SetUrlsForScreen(i, urls);
                 prefsManager.SetRotationIntervalForScreen(i,
-                    (int)currentPrefsUserControl.nudRotationInterval.Value);
-                prefsManager.SetRandomizeFlagForScreen(i, currentPrefsUserControl.cbRandomize.Checked);
+                    (int)screenUserControls[i].nudRotationInterval.Value);
+                prefsManager.SetRandomizeFlagForScreen(i, screenUserControls[i].cbRandomize.Checked);
                 prefsManager.CloseOnActivity = cbCloseOnActivity.Checked;
             }
         }
 
-        private void loadUrlsForTabToControl(int screenNum, PrefsByScreenUserControl currentPrefsUserControl)
+        private void LoadUrlsForTabToControl(int screenNum, PrefsByScreenUserControl currentPrefsUserControl)
         {
             currentPrefsUserControl.lvUrls.Items.Clear();
-
             var urls = prefsManager.GetUrlsByScreen(screenNum);
 
             foreach (var url in urls)
@@ -176,7 +185,7 @@ namespace Miceli.Web_Page_Screensaver
         {
             if (DialogResult == DialogResult.OK)
             {
-                readBackValuesFromUI();
+                ReadBackValuesFromUI();
                 prefsManager.SavePreferences();
             }
 
@@ -200,7 +209,14 @@ namespace Miceli.Web_Page_Screensaver
 
         private void anyMultiScreenModeButton_Click(object sender, EventArgs e)
         {
-            readBackValuesFromUI();
+            ReadBackValuesFromUI();
+            setMultiScreenModeFromButtonState();
+            ArrangeScreenTabs();
+        }
+
+        private void spanScreensButton_CheckedChanged(object sender, EventArgs e)
+        {
+            ReadBackValuesFromUI();
             setMultiScreenModeFromButtonState();
             ArrangeScreenTabs();
         }

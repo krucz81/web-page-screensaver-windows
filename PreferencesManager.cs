@@ -18,8 +18,8 @@
         private const string SCREEN_SPECIFIC_PREF_NAME_FORMATSTRING = "{0}Screen{1}";
 
         private const string MULTISCREEN_PREF_DEFAULT = "Separate";
-        private const string URL_PREF_PRIMARYSCREEN_DEFAULT = "https://www.google.com/trends/hottrends/visualize?nrow=5&ncol=5 https://screensaver.twingly.com/";
-        private const string URL_PREF_NONPRIMARYSCREEN_DEFAULT = "";
+        private const string URL_PREF_PRIMARYSCREEN_DEFAULT = "https://janemiceli.github.io/matrix/";
+        private const string URL_PREF_NONPRIMARYSCREEN_DEFAULT = "https://janemiceli.github.io/matrix/";
         private const string INTERVAL_PREF_DEFAULT = "30";
         private const string RANDOMIZE_PREF_DEFAULT = "False";
         private const string CLOSE_ON_ACTIVITY_PREF_DEFAULT = "True";

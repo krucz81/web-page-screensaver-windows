@@ -52,6 +52,7 @@ namespace Miceli.Web_Page_Screensaver
 
                 return urls;
             }
+            set => urls = value;
         }
 
         private void ScreensaverForm_Load(object sender, EventArgs e)
@@ -83,15 +84,12 @@ namespace Miceli.Web_Page_Screensaver
                     timer.Tick += (s, ee) => RotateSite();
                     timer.Start();
                 }
+               
 
                 // Display the first site in the list
                 RotateSite();
 
                 StartTime = DateTime.Now;
-            }
-            else
-            {
-                webView1.Visible = false;
             }
         }
 
@@ -167,27 +165,15 @@ namespace Miceli.Web_Page_Screensaver
         // screensavers and especially multi-window apps can get spurrious WM_MOUSEMOVE events
         // that don't actually involve any movement (cursor chnages and some mouse driver software
         // can generate them, for example) - so we record the actual mouse position and compare against it for actual movement.
-        private Point? lastMousePos;
+        //private Point? lastMousePos;
 
         public event UserEvent Event;
 
         public bool PreFilterMessage(ref Message m)
         {
-            if ((m.Msg == WM_MOUSEMOVE) && (this.lastMousePos == null))
-            {
-                this.lastMousePos = Cursor.Position;
-            }
 
-            if (((m.Msg == WM_MOUSEMOVE) && (Cursor.Position != this.lastMousePos))
-                || (m.Msg > WM_MOUSEMOVE && m.Msg <= WM_MBUTTONDBLCLK) || m.Msg == WM_KEYDOWN || m.Msg == WM_KEYUP)
-            {
+            Event?.Invoke();
 
-                if (Event != null)
-                {
-                    Event();
-                }
-            }
-            // Always allow message to continue to the next filter control
             return false;
         }
     }

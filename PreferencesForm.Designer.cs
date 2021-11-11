@@ -1,6 +1,7 @@
 ﻿namespace Miceli.Web_Page_Screensaver
 {
     using global::Web_Page_Screensaver;
+    using System;
 
     partial class PreferencesForm
     {
@@ -75,7 +76,7 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(95, 358);
+            this.okButton.Location = new System.Drawing.Point(126, 374);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 4;
@@ -87,7 +88,7 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(176, 358);
+            this.cancelButton.Location = new System.Drawing.Point(207, 374);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -101,7 +102,7 @@
             this.cbCloseOnActivity.AutoSize = true;
             this.cbCloseOnActivity.Checked = true;
             this.cbCloseOnActivity.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbCloseOnActivity.Location = new System.Drawing.Point(15, 334);
+            this.cbCloseOnActivity.Location = new System.Drawing.Point(15, 350);
             this.cbCloseOnActivity.Name = "cbCloseOnActivity";
             this.cbCloseOnActivity.Size = new System.Drawing.Size(153, 17);
             this.cbCloseOnActivity.TabIndex = 6;
@@ -115,20 +116,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.screenTabControl.Controls.Add(this.screenTabPage1);
             this.screenTabControl.Location = new System.Drawing.Point(15, 97);
-            this.screenTabControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.screenTabControl.Margin = new System.Windows.Forms.Padding(2);
             this.screenTabControl.Name = "screenTabControl";
             this.screenTabControl.SelectedIndex = 0;
-            this.screenTabControl.Size = new System.Drawing.Size(239, 220);
+            this.screenTabControl.Size = new System.Drawing.Size(270, 236);
             this.screenTabControl.TabIndex = 13;
             // 
             // screenTabPage1
             // 
             this.screenTabPage1.Controls.Add(this.prefsByScreenUserControl1);
             this.screenTabPage1.Location = new System.Drawing.Point(4, 22);
-            this.screenTabPage1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.screenTabPage1.Margin = new System.Windows.Forms.Padding(2);
             this.screenTabPage1.Name = "screenTabPage1";
-            this.screenTabPage1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.screenTabPage1.Size = new System.Drawing.Size(231, 194);
+            this.screenTabPage1.Padding = new System.Windows.Forms.Padding(2);
+            this.screenTabPage1.Size = new System.Drawing.Size(262, 210);
             this.screenTabPage1.TabIndex = 0;
             this.screenTabPage1.Text = "Screen 1";
             this.screenTabPage1.UseVisualStyleBackColor = true;
@@ -140,17 +141,18 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.prefsByScreenUserControl1.BackColor = System.Drawing.Color.White;
             this.prefsByScreenUserControl1.Location = new System.Drawing.Point(0, 0);
-            this.prefsByScreenUserControl1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.prefsByScreenUserControl1.Margin = new System.Windows.Forms.Padding(2);
             this.prefsByScreenUserControl1.Name = "prefsByScreenUserControl1";
-            this.prefsByScreenUserControl1.Size = new System.Drawing.Size(234, 197);
+            this.prefsByScreenUserControl1.Size = new System.Drawing.Size(265, 213);
             this.prefsByScreenUserControl1.TabIndex = 21;
+            this.prefsByScreenUserControl1.Load += new System.EventHandler(this.prefsByScreenUserControl1_Load);
             // 
             // spanScreensButton
             // 
             this.spanScreensButton.AutoSize = true;
             this.spanScreensButton.Checked = true;
             this.spanScreensButton.Location = new System.Drawing.Point(75, 8);
-            this.spanScreensButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.spanScreensButton.Margin = new System.Windows.Forms.Padding(2);
             this.spanScreensButton.Name = "spanScreensButton";
             this.spanScreensButton.Size = new System.Drawing.Size(50, 17);
             this.spanScreensButton.TabIndex = 14;
@@ -159,13 +161,14 @@
             this.spanScreensButton.Text = "Span";
             this.screenModeTooltip.SetToolTip(this.spanScreensButton, "All for One!");
             this.spanScreensButton.UseVisualStyleBackColor = true;
+            this.spanScreensButton.CheckedChanged += new System.EventHandler(this.spanScreensButton_CheckedChanged);
             this.spanScreensButton.Click += new System.EventHandler(this.anyMultiScreenModeButton_Click);
             // 
             // separateScreensButton
             // 
             this.separateScreensButton.AutoSize = true;
             this.separateScreensButton.Location = new System.Drawing.Point(178, 8);
-            this.separateScreensButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.separateScreensButton.Margin = new System.Windows.Forms.Padding(2);
             this.separateScreensButton.Name = "separateScreensButton";
             this.separateScreensButton.Size = new System.Drawing.Size(68, 17);
             this.separateScreensButton.TabIndex = 15;
@@ -198,7 +201,7 @@
             // 
             this.mirrorScreensButton.AutoSize = true;
             this.mirrorScreensButton.Location = new System.Drawing.Point(126, 8);
-            this.mirrorScreensButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.mirrorScreensButton.Margin = new System.Windows.Forms.Padding(2);
             this.mirrorScreensButton.Name = "mirrorScreensButton";
             this.mirrorScreensButton.Size = new System.Drawing.Size(51, 17);
             this.mirrorScreensButton.TabIndex = 17;
@@ -216,9 +219,9 @@
             this.multiScreenGroup.Controls.Add(this.spanScreensButton);
             this.multiScreenGroup.Controls.Add(this.separateScreensButton);
             this.multiScreenGroup.Location = new System.Drawing.Point(15, 46);
-            this.multiScreenGroup.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.multiScreenGroup.Margin = new System.Windows.Forms.Padding(2);
             this.multiScreenGroup.Name = "multiScreenGroup";
-            this.multiScreenGroup.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.multiScreenGroup.Padding = new System.Windows.Forms.Padding(2);
             this.multiScreenGroup.Size = new System.Drawing.Size(244, 28);
             this.multiScreenGroup.TabIndex = 18;
             this.multiScreenGroup.TabStop = false;
@@ -229,7 +232,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(272, 388);
+            this.ClientSize = new System.Drawing.Size(303, 404);
             this.Controls.Add(this.multiScreenGroup);
             this.Controls.Add(this.screenTabControl);
             this.Controls.Add(this.cbCloseOnActivity);
@@ -253,6 +256,11 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void prefsByScreenUserControl1_Load(object sender, EventArgs e)
+        {
+            //throw new NotImplementedException();
         }
 
         #endregion
