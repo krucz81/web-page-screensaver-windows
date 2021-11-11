@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Win32;
 using System.Windows.Forms;
 
-namespace pl.polidea.lab.Web_Page_Screensaver
+namespace Miceli.Web_Page_Screensaver
 {
     using System.Collections.Generic;
     using System.Drawing;

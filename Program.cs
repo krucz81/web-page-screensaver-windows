@@ -6,7 +6,7 @@ using Microsoft.Web.WebView2;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
 
-namespace pl.polidea.lab.Web_Page_Screensaver
+namespace Miceli.Web_Page_Screensaver
 {
     using System.Collections.Generic;
     using System.Drawing;

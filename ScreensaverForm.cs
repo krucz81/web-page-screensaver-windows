@@ -10,7 +10,7 @@ using Microsoft.Win32;
 using System.Diagnostics;
 using Microsoft.Web.WebView2;
 
-namespace pl.polidea.lab.Web_Page_Screensaver
+namespace Miceli.Web_Page_Screensaver
 {
     public partial class ScreensaverForm : Form
     {
