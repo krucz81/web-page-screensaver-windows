@@ -38,7 +38,7 @@
             this.cbCloseOnActivity = new System.Windows.Forms.CheckBox();
             this.screenTabControl = new System.Windows.Forms.TabControl();
             this.screenTabPage1 = new System.Windows.Forms.TabPage();
-            this.prefsByScreenUserControl1 = new Miceli.Web_Page_Screensaver.PrefsByScreenUserControl();
+            this.prefsByScreenUserControl1 = new PrefsByScreenUserControl();
             this.spanScreensButton = new System.Windows.Forms.RadioButton();
             this.separateScreensButton = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
