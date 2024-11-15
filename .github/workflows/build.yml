@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Używa najnowszej obsługiwanej wersji
+        uses: actions/checkout@v3
 
       - name: Install Chocolatey
         run: |
@@ -32,7 +32,7 @@ jobs:
           dotnet add package Microsoft.Web.WebView2 --version 1.0.1370.28
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3  # Używa najnowszej obsługiwanej wersji
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
 
@@ -40,7 +40,8 @@ jobs:
         run: dotnet clean Web-Page-Screensaver.sln
 
       - name: Build Solution
-        run: dotnet build Web-Page-Screensaver.sln --configuration Release --verbosity detailed
+        run: |
+          dotnet build Web-Page-Screensaver.sln --configuration Release --verbosity minimal || exit 1
 
       - name: Verify Build Artifacts
         run: |
