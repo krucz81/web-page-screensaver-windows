@@ -20,11 +20,10 @@ jobs:
           [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
           iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
 
-      - name: Install .NET Framework Developer Pack
-        run: choco install netfx-4.8-devpack -y
-
-      - name: Install Windows SDK
-        run: choco install windows-sdk-10.0 -y
+      - name: Install .NET SDK and Framework Developer Pack
+        run: |
+          choco install dotnet-sdk -y
+          choco install netfx-4.8-devpack -y
 
       - name: Install Dependencies
         run: |
