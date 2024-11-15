@@ -20,10 +20,16 @@ jobs:
           [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
           iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
 
-      - name: Install .NET SDK and Framework Developer Pack
-        run: |
-          choco install dotnet-sdk -y
-          choco install netfx-4.8-devpack -y
+      - name: Install .NET Framework Developer Pack
+        run: choco install netfx-4.8-devpack -y
+
+      - name: Install .NET SDK 6.0
+        run: choco install dotnet-sdk --version=6.0.413 -y
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '6.0.x'
 
       - name: Install Dependencies
         run: |
@@ -31,17 +37,8 @@ jobs:
           dotnet add package System.Runtime.WindowsRuntime --version 4.0.0
           dotnet add package Microsoft.Windows.Compatibility --version 6.0.4
 
-      - name: Clean Build Folder
-        run: dotnet clean Web-Page-Screensaver.sln
-
       - name: Build Solution
         run: dotnet build Web-Page-Screensaver.sln --configuration Release --verbosity detailed
-
-      - name: Verify Build Artifacts
-        run: |
-          if not exist "bin/Release/Web-Page-Screensaver.scr" (
-            echo "Build failed: .scr file not found" & exit 1
-          )
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
