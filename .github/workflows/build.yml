@@ -28,9 +28,9 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          dotnet add package Microsoft.Web.WebView2 --version 1.0.1370.28 --force
+          dotnet add package Microsoft.Web.WebView2 --version 1.0.1370.28
           dotnet add package System.Runtime.WindowsRuntime --version 4.0.0
-          dotnet add package Microsoft.Windows.Compatibility --version 6.0.4 --force
+          dotnet add package Microsoft.Windows.Compatibility --version 6.0.4
 
       - name: Clean Build Folder
         run: dotnet clean Web-Page-Screensaver.sln
