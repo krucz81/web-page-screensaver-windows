@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@latest  # Używa najnowszej wersji
 
       - name: Install Chocolatey
         run: |
@@ -32,7 +32,7 @@ jobs:
           dotnet add package Microsoft.Web.WebView2 --version 1.0.1370.28
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@latest  # Używa najnowszej wersji
         with:
           dotnet-version: '6.0.x'
 
