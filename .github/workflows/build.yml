@@ -14,17 +14,39 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install Chocolatey
+        run: |
+          Set-ExecutionPolicy Bypass -Scope Process -Force;
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
+          iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'));
+
+      - name: Install .NET Framework Developer Pack
+        run: choco install netfx-4.8-devpack -y
+
+      - name: Install Windows SDK
+        run: choco install windows-sdk-10.0 -y
+
+      - name: Install Missing Dependencies
+        run: |
+          dotnet add package Microsoft.Windows.Compatibility --version 7.0.0
+          dotnet add package Microsoft.Web.WebView2 --version 1.0.1370.28
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '6.0.x'
 
-      - name: Install .NET Framework Developer Pack
-        run: |
-          choco install netfx-4.8-devpack -y
+      - name: Clean Build Folder
+        run: dotnet clean Web-Page-Screensaver.sln
 
       - name: Build Solution
-        run: dotnet build Web-Page-Screensaver.sln --configuration Release
+        run: dotnet build Web-Page-Screensaver.sln --configuration Release --verbosity detailed
+
+      - name: Verify Build Artifacts
+        run: |
+          if not exist "bin/Release/Web-Page-Screensaver.scr" (
+            echo "Build failed: .scr file not found" & exit 1
+          )
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
